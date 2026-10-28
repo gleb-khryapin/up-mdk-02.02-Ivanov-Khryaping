@@ -15,8 +15,24 @@ OWNER="gleb-khryapin"
 REPO="gleb-khryapin/up-mdk-02.02-Ivanov-Khryaping"
 PROJECT_NUMBER="${1:-}"
 
+# GitHub CLI может быть установлен, но отсутствовать в PATH текущего окна
+if ! command -v gh >/dev/null 2>&1; then
+  for candidate in "/c/Program Files/GitHub CLI/gh.exe" "/c/Program Files (x86)/GitHub CLI/gh.exe"; do
+    if [ -x "$candidate" ]; then
+      PATH="$PATH:$(dirname "$candidate")"
+      break
+    fi
+  done
+fi
+
 if ! command -v gh >/dev/null 2>&1; then
   echo "GitHub CLI не найден. Установите: winget install GitHub.cli"
+  echo "Если он уже установлен, перезапустите терминал."
+  exit 1
+fi
+
+if ! gh auth status >/dev/null 2>&1; then
+  echo "Вы не вошли в GitHub. Выполните команду: gh auth login"
   exit 1
 fi
 
