@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.db
+*.sqlite3
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Среда и секреты
+.env
+.env.local
+
+# Редакторы и ОС
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Тесты и логи
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Сборка и логи разработки
+server.log
+vite.log
+package-lock.json
