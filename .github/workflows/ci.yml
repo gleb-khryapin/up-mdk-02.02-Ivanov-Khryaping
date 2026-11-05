@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Серверная часть
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Установить Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Установить зависимости
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r src/backend/requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Проверка стиля кода
+        run: ruff check .
+
+      - name: Проверка форматирования
+        run: ruff format --check .
+
+      - name: Тесты с измерением покрытия
+        run: pytest --cov --cov-report=term --cov-report=xml
+
+      - name: Сохранить отчёт о покрытии
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-backend
+          path: coverage.xml
+
+  frontend:
+    name: Интерфейс
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Установить Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Установить зависимости
+        run: npm ci
+
+      - name: Проверка стиля кода
+        run: npm run lint --workspace frontend
+
+      - name: Проверка форматирования
+        run: npm run format:check --workspace frontend
+
+      - name: Тесты компонентов
+        run: npm test
+
+      - name: Сборка production-версии
+        run: npm run build

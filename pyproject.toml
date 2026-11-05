@@ -1,0 +1,26 @@
+# Ruff заменяет связку flake8 + isort + black: один инструмент вместо трёх
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src/backend", "tests/backend"]
+exclude = [".venv", "node_modules", "src/frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["B008"]  # Depends() в сигнатуре - обычная практика FastAPI
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/backend"]
+pythonpath = ["src/backend"]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["src/backend/app"]
+omit = ["*/__init__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

@@ -41,7 +41,9 @@ export const authApi = {
   login: (email: string, password: string) =>
     api.post<AuthResponse>("/auth/login", { email, password }).then((r) => r.data),
   register: (email: string, full_name: string, password: string, role: string) =>
-    api.post<AuthResponse>("/auth/register", { email, full_name, password, role }).then((r) => r.data),
+    api
+      .post<AuthResponse>("/auth/register", { email, full_name, password, role })
+      .then((r) => r.data),
   me: () => api.get<User>("/auth/me").then((r) => r.data),
   users: () => api.get<User[]>("/auth/users").then((r) => r.data),
 };
@@ -56,9 +58,10 @@ export const boardApi = {
   updateTask: (boardId: number, taskId: number, payload: Partial<Task>) =>
     api.patch<Task>(`/boards/${boardId}/tasks/${taskId}`, payload).then((r) => r.data),
   moveTask: (boardId: number, taskId: number, status: TaskStatus, position: number) =>
-    api.patch<Task>(`/boards/${boardId}/tasks/${taskId}/move`, { status, position }).then((r) => r.data),
-  deleteTask: (boardId: number, taskId: number) =>
-    api.delete(`/boards/${boardId}/tasks/${taskId}`),
+    api
+      .patch<Task>(`/boards/${boardId}/tasks/${taskId}/move`, { status, position })
+      .then((r) => r.data),
+  deleteTask: (boardId: number, taskId: number) => api.delete(`/boards/${boardId}/tasks/${taskId}`),
 };
 
 export default api;

@@ -29,7 +29,10 @@ export default function BoardPage() {
 
   useEffect(() => {
     load().catch(() => setNotice("Не удалось загрузить доску"));
-    authApi.users().then(setUsers).catch(() => undefined);
+    authApi
+      .users()
+      .then(setUsers)
+      .catch(() => undefined);
   }, [load]);
 
   function showNotice(text: string) {
@@ -83,7 +86,9 @@ export default function BoardPage() {
   }
 
   if (!board) {
-    return <div className="min-h-screen grid place-items-center text-slate-400">Загрузка доски...</div>;
+    return (
+      <div className="min-h-screen grid place-items-center text-slate-400">Загрузка доски...</div>
+    );
   }
 
   const visibleTasks = onlyMine
@@ -100,7 +105,11 @@ export default function BoardPage() {
 
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2 text-sm text-slate-600">
-            <input type="checkbox" checked={onlyMine} onChange={(e) => setOnlyMine(e.target.checked)} />
+            <input
+              type="checkbox"
+              checked={onlyMine}
+              onChange={(e) => setOnlyMine(e.target.checked)}
+            />
             только мои задачи
           </label>
           <div className="text-right">

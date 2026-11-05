@@ -1,4 +1,5 @@
 """Настройки приложения. Значения читаются из файла .env."""
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 

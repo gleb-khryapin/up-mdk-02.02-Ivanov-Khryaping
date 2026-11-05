@@ -107,7 +107,8 @@ export default function LoginPage() {
         </button>
 
         <p className="text-xs text-slate-400 mt-6 text-center">
-          Демонстрационные учётные записи: lead@teamboard.ru / lead12345, dev@teamboard.ru / dev12345
+          Демонстрационные учётные записи: lead@teamboard.ru / lead12345, dev@teamboard.ru /
+          dev12345
         </p>
       </form>
     </div>

@@ -1,4 +1,5 @@
 """Операции с колонками и порядком карточек."""
+
 from sqlalchemy.orm import Session
 
 from app.models.board import Column, Task, TaskStatus

@@ -4,6 +4,7 @@
 Создаёт двух пользователей, доску и несколько задач, чтобы доску
 можно было сразу открыть и показать.
 """
+
 from app.core.database import Base, SessionLocal, engine
 from app.core.security import hash_password
 from app.models.board import Board, Priority, Task, TaskStatus

@@ -31,3 +31,5 @@ htmlcov/
 server.log
 vite.log
 package-lock.json
+coverage.xml
+.coverage

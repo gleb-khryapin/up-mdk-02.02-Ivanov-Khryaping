@@ -1,4 +1,5 @@
 """Точка входа серверной части TeamBoard."""
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI

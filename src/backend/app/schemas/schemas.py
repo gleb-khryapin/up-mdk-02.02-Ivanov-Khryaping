@@ -1,4 +1,5 @@
 """Схемы запросов и ответов. Pydantic проверяет данные до попадания в бизнес-логику."""
+
 from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field

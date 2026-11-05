@@ -40,9 +40,7 @@ def test_short_password_is_rejected(client):
 
 
 def test_login_with_correct_password(client, lead):
-    response = client.post(
-        "/api/auth/login", json={"email": "lead@teamboard.ru", "password": "lead12345"}
-    )
+    response = client.post("/api/auth/login", json={"email": "lead@teamboard.ru", "password": "lead12345"})
     assert response.status_code == 200
     assert response.json()["user"]["role"] == "lead"
 

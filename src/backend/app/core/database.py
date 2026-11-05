@@ -3,6 +3,7 @@
 Движок выбирается по строке DATABASE_URL, поэтому переход с SQLite
 на MySQL не требует изменений в коде моделей и запросов.
 """
+
 from collections.abc import Generator
 
 from sqlalchemy import create_engine

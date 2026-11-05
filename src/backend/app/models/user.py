@@ -1,6 +1,7 @@
 """Пользователь системы и его роль."""
+
 import enum
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, Enum, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -23,9 +24,7 @@ class User(Base):
     full_name: Mapped[str] = mapped_column(String(255))
     password_hash: Mapped[str] = mapped_column(String(255))
     role: Mapped[Role] = mapped_column(Enum(Role), default=Role.DEVELOPER)
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
 
     created_tasks = relationship("Task", back_populates="author", foreign_keys="Task.author_id")
     assigned_tasks = relationship("Task", back_populates="assignee", foreign_keys="Task.assignee_id")

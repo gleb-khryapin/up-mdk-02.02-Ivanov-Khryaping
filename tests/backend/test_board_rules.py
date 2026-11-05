@@ -54,14 +54,12 @@ def test_positions_are_recalculated_after_move(client, board, lead_headers):
     _move(client, board, lead_headers, tasks[0]["id"], "todo")
 
     detail = client.get(f"/api/boards/{board['id']}", headers=lead_headers).json()
-    backlog = sorted(
-        [t for t in detail["tasks"] if t["status"] == "backlog"], key=lambda t: t["position"]
-    )
+    backlog = sorted([t for t in detail["tasks"] if t["status"] == "backlog"], key=lambda t: t["position"])
     assert [t["position"] for t in backlog] == [0, 1]
 
 
 def test_move_to_specific_position(client, board, lead_headers):
-    first = _create(client, board, lead_headers, "Первая", status="todo")
+    _create(client, board, lead_headers, "Первая", status="todo")
     second = _create(client, board, lead_headers, "Вторая", status="todo")
     _move(client, board, lead_headers, second["id"], "todo", position=0)
 

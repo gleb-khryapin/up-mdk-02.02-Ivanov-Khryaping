@@ -52,9 +52,10 @@ def test_developer_cannot_delete_task(client, board, lead_headers, dev_headers):
         f"/api/boards/{board['id']}/tasks", json={"title": "Удаляемая задача"}, headers=lead_headers
     ).json()
 
-    assert client.delete(
-        f"/api/boards/{board['id']}/tasks/{task['id']}", headers=dev_headers
-    ).status_code == 403
-    assert client.delete(
-        f"/api/boards/{board['id']}/tasks/{task['id']}", headers=lead_headers
-    ).status_code == 204
+    assert (
+        client.delete(f"/api/boards/{board['id']}/tasks/{task['id']}", headers=dev_headers).status_code == 403
+    )
+    assert (
+        client.delete(f"/api/boards/{board['id']}/tasks/{task['id']}", headers=lead_headers).status_code
+        == 204
+    )
