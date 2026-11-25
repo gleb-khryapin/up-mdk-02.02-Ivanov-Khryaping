@@ -30,6 +30,5 @@ htmlcov/
 # Сборка и логи разработки
 server.log
 vite.log
-package-lock.json
 coverage.xml
 .coverage
